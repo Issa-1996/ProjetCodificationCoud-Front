@@ -1,0 +1,169 @@
+<div class="w-100">
+
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm"
+         style="background:#FFFFFF">
+
+      <a href="https://www.coudsn.com" target="_blank">
+        <img class="navbar-brand" src="assets/photo/coud.png" style="height:3rem;width: 10rem " alt="photo"></a>
+      <button class="navbar-toggler" type="button"
+              data-toggle="collapse"
+              data-target="#navbarColor02"
+              aria-controls="navbarColor02"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+
+          <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle h6"
+                data-toggle="dropdown"
+                role="button"
+                *ngIf="role.includes('ROLE_ADMIN')"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >Menu </a>
+
+              <div class="dropdown-menu">
+                <a class="dropdown-item"
+                   type="submit"
+                   title="Se dirige vers la listes des réservations"
+                routerLink="/e&12t/xxa1PzTd86HNGnfdy(dTHJH23:dg;/e&12t/rrr/xa1zT">Listes des réservations
+                </a>
+                <a class="dropdown-item"
+                     type="submit"
+                     *ngIf="role.includes('ROLE_SUPERADMIN')"
+                     title="Se dirige vers la espace Administrateur"
+                  routerLink="/e&12t/xxa1PzTd86HNGnfdy(dTHJH23:dg;/e&12t/adad/yt1T">Espace Administrateur
+                </a>
+                <a class="dropdown-item"
+                     type="submit"
+                     title="Se dirige vers la liste définitive codification"
+                  routerLink="/e&12t/xxa1PzTd86HNGnfdy(dTHJH23:dg;/e&12t/cccc/xrty">Liste définitive codification
+                </a>
+                <a class="dropdown-item"
+                     type="submit"
+                     title="Se dirige vers la liste des chambres"
+                  routerLink="/e&12t/xxa1PzTd86HNGnfdy(dTHJH23:dg;/e&12t/aaa/xaru">Liste des chambres
+                </a>
+              </div>
+            </li>
+        </ul>
+
+        <!--  recherche
+        <ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input
+              class="form-control mr-sm-2"
+              type="text"
+              placeholder="Rechercher..."/>
+            <button class="btn btn-light my-3 my-sm-0 text-white" type="submit"
+                    style="background: #3B599B">
+              Rechercher
+            </button>
+          </form>
+        </ul> -->
+
+        <ul class="navbar-nav mr-o ml-4" style="width: 16%; border-radius: 10px;">
+
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              data-toggle="dropdown"
+              role="button"
+              *ngIf="role.includes('ROLE_ADMIN')"
+              aria-haspopup="true"
+              aria-expanded="false"
+              style="color: black;"
+            >ADMINISTRATEUR</a>
+            <a
+              class="nav-link dropdown-toggle"
+              data-toggle="dropdown"
+              *ngIf="role.includes('ROLE_ETUDIANT')"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              style="color: black;"
+            >ETUDIANT</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item"
+              type="submit"
+              *ngIf="role.includes('ROLE_ADMIN')"
+              title="Voire Informations" data-toggle="modal" data-target="#exampleModalLong"
+              >Mes Information  </a>
+              <a class="dropdown-item"
+                 type="submit"
+                 title="Se Deconnecter"
+                 (click)="logOout()">Se Deconnecter</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <!--Formulaire da'ajout admin-->
+          <div class="text-center">
+            <img src="./assets/logo_coud.jpg" alt="" width="190px" height="50px">
+          </div>
+          <div class="text-center h4" id="container">Afficher et/ou Modifier mes infos</div>
+          <div class="container" style="margin-top: 1%;">
+              <div class="row">
+
+                <div class="col-md-12" style="background-color: blueviolet; height: 640px;" id="login">
+                  <h1 style="text-align: center; margin-top: 5%; color: rgb(224, 210, 210);">Compte Admin</h1>
+                  <div class="row" style="width: 20%; height: 50px; margin-left: 42%; margin-top: -2%;">
+                      <img src="../assets/images1.jpeg" class="d-block w-100" alt="..." style="height: 80px; width: -50px; border: none;-moz-border-radius : 75px; -webkit-border-radius : 75px; border-radius : 75px;">
+                  </div>
+                    <div class="register">
+                      <span style="color: orange; font-size: 20px; margin-left: 25%;" *ngIf="erreur!=''"> {{ erreur }} </span>
+                      <form [formGroup]="addForm">
+                            <div class="row mb-2">
+                              <div class="col">
+                                <label class="col-form-label" for="inputDefault">Prénom</label>
+                                <input type="text" class="form-control sm-12" placeholder="Entrer le prenom de l'admin" formControlName="prenoms" required>
+                                <span style="color: orange; font-size: 16x;" *ngIf="erreurPrenom!=''"> {{ erreurPrenom }} </span>
+                              </div>
+                            </div>
+                              <div class="row mb-3">
+                                <div class="col">
+                                  <label class="col-form-label" for="inputDefault">Nom</label>
+                                  <input type="text" class="form-control sm-12" placeholder="Entrer le Nom de l'admin" formControlName="nom">
+                                  <span style="color: orange; font-size: 16x;" *ngIf="erreurNom!=''"> {{ erreurNom }} </span>
+                                </div>
+                              </div>
+                              <div class="row mb-3">
+                                <div class="col">
+                                  <label class="col-form-label" for="inputDefault">Email</label>
+                                  <input type="email" class="form-control sm-12" placeholder="Entrer votre Email" formControlName="username">
+                                  <span style="color: orange; font-size: 16x;" *ngIf="erreurEmail!=''"> {{ erreurEmail }} </span>
+                                </div>
+                              </div>
+
+                              <div class="row mb-3">
+                                <div class="col">
+                                  <label class="col-form-label" for="inputDefault">Nouveau mot de passe (facultatif)</label>
+                                  <input type="email" class="form-control sm-12" placeholder="Entrer votre mot de passe" formControlName="password">
+                                  <span style="color: orange; font-size: 16x;" *ngIf="erreurEmail!=''"> {{ erreurPassword }} </span>
+                                </div>
+                              </div>
+                              <button type="button" class="btn btn-success btn-lg btn-block mt-5"  [disabled]="sending" (click)="onSignIn()">{{btnText}}</button>
+                          </form>
+                    </div>
+                </div>
+        </div>
+        </div>
+        <!--Fin ajout admin-->
+        <div class="modal-footer" style="margin-right: 40%;">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Retour</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>

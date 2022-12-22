@@ -1,0 +1,115 @@
+<div class="container mt-3">
+  <mat-card class="mt-5 bg-success">
+    <h2 class="text-center"> Espace administrateur.</h2>
+  </mat-card>
+  <div class="table mt-5" >
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Prénoms</th>
+          <th scope="col">Nom</th>
+          <!--<input type="text" [(ngModel)]="editUser">
+          <button (click)="subscribe()">changer</button>-->
+          <th scope="col">Statut/Action</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let list of listAdmin" >
+        <tr>
+          <th scope="row"> {{ list.id }} </th>
+          <td>{{ list.prenoms }}</td>
+          <td>{{ list.nom }}</td>
+          <td><mat-slide-toggle [color]="'warn'" [checked]="list.archivage" (click)="archive(list)">{{list.archivage?'Débloquer':'Bloquer'}}</mat-slide-toggle></td>
+        </tr>
+      </tbody>
+    </table>   
+    <div>
+      <div class="float-right btn-normal">
+        <button class="btn" (click)="listeAdmin(pageCurrent - 1)" [disabled]="(pageCurrent==1)">Précedent</button>
+        <button class="btn ml-2" (click)="listeAdmin(pageCurrent + 1)" [disabled]="(pageCurrent==totalPage)">Suivant</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+      </div>
+    
+      <div class="float-right btn-icon">
+        <button class="btn mr-2" (click)="listeAdmin(pageCurrent - 1)" [disabled]="(pageCurrent==1)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+          </svg>
+        </button>
+    
+        <button class="btn" (click)="listeAdmin(pageCurrent + 1)" [disabled]="(pageCurrent==totalPage)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="float-left">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddUser">
+          Nouveau compte Admin
+        </button>
+      </div>
+    </div>
+  </div>
+  <!--Boite dialogue-->
+  <div class="modal fade" id="AddUser" tabindex="-1" role="dialog" aria-labelledby="AddUserTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <!--Formulaire da'ajout admin-->
+        <div class="text-center">
+          <img src="./assets/logo_coud.jpg" alt="" width="190px" height="50px">
+        </div>
+        <div class="text-center h4" id="container">Bienvenue sur votre platemform de codification</div>
+        <div class="container" style="margin-top: 1%;">
+            <div class="row">
+
+              <div class="col-md-12" style="background-color: blueviolet; height: 590px;" id="login">
+                <h1 style="text-align: center; margin-top: 5%; color: white;">Compte Admin</h1>
+                <div class="row" style="width: 20%; height: 50px; margin-left: 42%; margin-top: -2%;">
+                    <img src="../assets/images1.jpeg" class="d-block w-100" alt="..." style="height: 80px; width: -50px; border: none;-moz-border-radius : 75px; -webkit-border-radius : 75px; border-radius : 75px;">
+                </div>
+                  <div class="register">
+                    <span style="color: orange; font-size: 20px; margin-left: 25%;" *ngIf="erreur!=''"> {{ erreur }} </span>
+                    <form [formGroup]="addForm">
+                          <div class="row mb-2">
+                            <div class="col">
+                              <label class="col-form-label" for="inputDefault">Prénom</label>
+                              <input type="text" class="form-control sm-12" placeholder="Entrer le prenom de l'admin" formControlName="prenoms" required>
+                              <span style="color: orange; font-size: 16px;" *ngIf="erreurPrenom!=''"> {{ erreurPrenom }} </span>
+                            </div>
+                          </div>
+                            <div class="row mb-3">
+                              <div class="col">
+                                <label class="col-form-label" for="nom">Nom</label>
+                                <input type="text" class="form-control sm-12" name="nom" placeholder="Entrer le Nom de l'admin" formControlName="nom">
+                                <span style="color: orange; font-size: 16px;" *ngIf="erreurNom!=''"> {{ erreurNom }} </span>
+                              </div>
+                            </div>
+                            <div class="row mb-3">
+                              <div class="col">
+                                <label class="col-form-label" for="email">Email</label>
+                                <input type="email" class="form-control sm-12"
+                                       placeholder="Entrer votre Email" formControlName="username">
+                                <span style="color: orange; font-size: 16px;" *ngIf="erreurEmail!=''"> {{ erreurEmail }} </span>
+                              </div>
+                            </div>
+
+
+                            <button type="button" class="btn btn-success btn-lg btn-block mt-5"
+                                    [disabled]="sending" (click)="onSignIn()">{{btnText}}</button>
+                        </form>
+                  </div>
+              </div>
+      </div>
+      </div>
+      <!--Fin ajout admin-->
+      <div class="modal-footer" style="margin-right: 40%;">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Retour</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!--fin boite dialogue-->
+
+<mat-spinner *ngIf="spinner" style="position:absolute;top: 50%; left:50%" color="accent"></mat-spinner>

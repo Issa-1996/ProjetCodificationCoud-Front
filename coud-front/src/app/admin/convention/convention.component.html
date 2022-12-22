@@ -1,0 +1,100 @@
+
+<div class="container mt-5" *ngFor="let etu of etudiant">
+
+<div class="row-cols-lg">
+  <!-- information header gauche-->
+<div class="float-left">
+  <ul>
+    Ministére de l'Enseignement <br><br>
+    Supérieur et de la Recherche,<br><br>
+    CENTRE DES OEUVRES UNIVERSITAIRES DE DAKAR
+  </ul>
+</div>
+  <!-- information header droit -->
+  <div class="table">
+    &nbsp;N° Chambre: {{etu.reservation[etu.reservation.length-1].affectation.lit.chambre.numero}}<br><br>
+    &nbsp;Pavillon: {{etu.reservation[etu.reservation.length-1].affectation.lit.chambre.pavillon.nom}}<br><br>
+    &nbsp;Campus: {{etu.reservation[etu.reservation.length-1].affectation.lit.chambre.pavillon.campus.nom}}<br><br>
+    &nbsp;Caution:.........................<br><br>
+    &nbsp;Taux/Mois.........................
+  </div>
+
+  </div>
+
+    <div class="row col-md mt-5 ml-4 h4." ><strong>N°: ____________________</strong></div>
+
+    <p class="borde pt-3 pb-3"><strong>CONVENTION D'HEBERGEMENT</strong></p>
+    <!-- information header droit -->
+    <p class="anne mt-4" >ANNEE UNIVERSITAIRE {{this.annee - 1}}/{{this.annee}}</p><br>
+
+    <!-- information prenom gauche -->
+  <div class=" row-cols-md ml-4 centrage ">
+    <div class=" prenom  ">
+      <p><strong>Prénom (s) : </strong>{{etu.prenoms}} </p><br>
+      <p><strong>Date de naissance: </strong>{{etu.dateNaissance}} </p><br>
+      <p><strong>Nationalite :</strong> ........</p><br>
+      <p><strong>Faculte : </strong> {{etu.niveau.departement.nom}}</p><br>
+      <p><strong>N°carte COUD :</strong>......... </p><br>
+      <p><strong>Beneficie l'hebergement :</strong>.............</p>
+    </div>
+    <!-- information nom droit -->
+    <div class=" nom ">
+      <p> <strong>Nom : </strong>{{etu.nom}}</p><br>
+      <p> <strong>Lieu : </strong>{{etu.lieuNaissance}}</p><br>
+      <p> <strong>Bourse :</strong>................. </p><br>
+      <p> <strong>Niveau :  </strong>{{etu.niveau.nom}}</p><br>
+      <p> <strong>N° CE :  </strong>{{etu.username}}</p>
+    </div>
+  </div>
+
+    <!-- Reglement interieur -->
+  <div class="row col-md-12">
+    <p class="extrait mt-2 "><strong>EXTRAIT DU REGLEMENT INTERIEUR</strong></p>
+  <div class="reglement ml-4 p-2">
+
+    <p>
+      &nbsp; <strong> Article 16</strong><br>
+      &nbsp; 1- Le président doit à son installation, vérifer et signer l'invention du mobillier et de la literie de
+        la chambre  qui lui est &nbsp;&nbsp;attribuée et dont il est entiérement ressponsable <br>
+      &nbsp; 2- Toute entrée ou toute sortie de mobilier personnel doit être autorisée par le service de
+      &nbsp; l'accueil et du logement en &nbsp;&nbsp;rapport avec la comptabilité des Matiéres <br>
+      &nbsp; 3- Le locataire ne peut: <br>
+      &nbsp; * ni héberger un autre étudiant, même bénéfciaire des Oeuvres <br>
+        &nbsp;&nbsp; <br/> * ni sous louer son lit ou sa sa chambre <br>
+      &nbsp; * ni céder son lit ou sa chambre <br>
+      &nbsp; 4- Toute forme de commerce est interdit dans les chambres</p>
+
+    <p>
+      &nbsp;<strong> Article 17</strong><br>
+      &nbsp; Il est formellement interdite de recevoir des visites susceptibles de troubler l'ordre et la bonne
+        &nbsp;&nbsp;renommée de la cité</p>
+
+    <p>
+      &nbsp; <strong> Article 18</strong>:(Alinéa 3)<br>
+      &nbsp; L'installation des appareils électoménagers ou audiovisuels n'est autorisée. Toute violation de
+        l'une des dispositions &nbsp;&nbsp;de ces articles sera sanctionée par l'exécution du contrevenant <br>
+      &nbsp; <strong> N.B: </strong>tout étudiant attributaire d'un lit dispose d'un delai maximum de 07 jours , à compter de &nbsp;&nbsp; la
+        rentrée &nbsp;&nbsp;accadémique de l'établissement dont il reléve , afin d'effectuer les formalités  &nbsp;&nbsp;requises
+        pour l'hébergement. Le loyer &nbsp;&nbsp;est dû à partir de cette, passée ce délai , le lit est réaffecté sans
+        prévis</p>
+  </div>
+  </div>
+
+    <!-- footer gauche -->
+    <div class="col-md-12">
+      <div class=" float-left" > <br>
+        <p class="mt-2">Pour le Directeur du COUD <br>Le Chef du Service de l'hebergement</p>
+      </div>
+    <!-- footer droit -->
+      <div class=" float-right" >
+        <p class="mt-3"> Dakar, le..................20....</p>
+        <p> Lu et Approuvé <br> Le Locataire </p>
+      </div>
+    </div>
+
+    <div style="break-after: page;"></div>
+
+ </div>
+
+ <mat-spinner *ngIf="spinner" style="position:absolute;top: 50%; left:50%" color="accent"></mat-spinner>
+

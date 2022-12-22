@@ -1,0 +1,32 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 20%;
+}
+
+.example-card {
+  max-width: 400px;
+}
+#exampleModalCenterTitle{
+  font-size: 26px;
+  margin-left: 10%;
+}
+@media only screen and (max-width: 1024px){
+  .tableusers {
+    width: 100%;
+
+  }
+  .mesinfo{
+    width: 100%;
+  }
+  #butcol{
+    font-size: 20px;
+  }
+}

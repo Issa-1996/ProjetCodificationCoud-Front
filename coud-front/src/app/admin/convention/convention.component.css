@@ -1,0 +1,67 @@
+.container {
+font-size: 15px;
+}
+
+.table {
+  height: 220px;
+  width: 250px;
+  border: black solid 3px;
+  float: right;
+  font-size: 20px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
+.borde {
+  margin-left: 290px;
+  border : 3px solid black;
+  width: 500px;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 28px;
+  font-style: italic;
+  font-family: sans-serif;
+}
+
+.anne{
+  margin-left: 400PX;
+}
+
+.prenom{
+  float: left;
+  font-size: 20px;
+  width: 50%;
+}
+
+.nom{
+  float: right;
+  font-size: 20px;
+  width: 50%;
+}
+
+.extrait{
+  margin-left: 300px;
+  border-top: 3px solid black;
+  border-right: 3px solid black;
+  border-left: 3px solid black;
+  width: 450px;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-family: sans-serif;
+}
+
+ .reglement{
+   border: 3px solid black;
+   width: 100%;
+   font-size: 24px;
+   margin-top: -12px;
+ }
+p{
+  font-size: 20px;
+}
+
+ul{
+  font-size: 22px;
+}
+

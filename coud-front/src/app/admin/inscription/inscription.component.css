@@ -1,0 +1,41 @@
+/* Issa */
+.register{
+    margin-top: 12%;
+    color: white;
+    font-weight:bold;
+}
+#login{
+    border-bottom-right-radius: 5%;
+    border-top-right-radius: 5%;
+}
+.register{
+    margin-top: 8%;
+    color: white;
+    font-weight:bold;
+}
+.register input{
+    box-shadow: 0px 0px 10px 0px grey;
+    height: 50px;
+}
+.register input,button{
+    box-shadow: 0px 0px 10px 0px grey;
+}
+#container{
+    box-shadow: 0px 0px 5px 0px gray;
+    margin-top: 5%;
+    width: 100%;
+}
+
+.btn-icon{
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .btn-icon{
+        display: block;
+    }
+
+    .btn-normal{
+        display: none;
+    }
+}

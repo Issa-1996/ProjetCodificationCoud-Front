@@ -1,0 +1,111 @@
+<!-- LISTE DES ETUDIANTS -->
+<div class="container" id="containers">
+  <mat-card class="mt-5 bg-success">
+    <h2 class="text-center"> La liste des étudiants ayant réservé un lit.</h2>
+  </mat-card>
+  <!-- Column bouttton lit et la liste des lits -->
+  <div class="mt-4 shadow-sm text-center">
+      <button routerLink="/e&12t/xxa1PzTd86HNGnfdy(dTHJH23:dg;/e&12t/aaa/xaru" class="btn btn-outline-success ml-3 ">
+          Voir la liste des chambres</button>
+      <button routerLink="/e&12t/xxa1PzTd86HNGnfdy(dTHJH23:dg;/e&12t/cccc/xrty" class="btn btn-outline-success ml-3 btn-list-codi">
+        Voir la liste des codifications </button>
+  </div>
+
+  <!-- LISTE DES SELECTS -->
+  <div class="mt-2 menu-filter row d-flex justify-content-center text-center">
+
+    <div class="mr-2">
+      <mat-form-field appearance="fill">
+        <mat-label>Faculté</mat-label>
+        <select matNativeControl #selectElement (change)="getDepartByFaculte(selectElement.value)">
+          <option value="choisir faculté">Choisir faculté</option>
+          <option *ngFor="let item of faculte" >{{item.nom}} </option>
+        </select>
+      </mat-form-field>
+    </div>
+
+    <div class="mr-2">
+      <mat-form-field appearance="fill" >
+        <mat-label>Département</mat-label>
+        <select matNativeControl #select (change)="getNiveauByDepartement(select.value)" >
+          <option value="">Choisir département</option>
+          <option *ngFor="let item of departements" > {{item.nom}} </option>
+        </select>
+      </mat-form-field>
+    </div>
+
+    <div class="">
+      <mat-form-field appearance="fill" >
+        <mat-label>Niveau</mat-label>
+        <select matNativeControl #element (change)="getEtudiantByNiveau(element.value)">
+          <option value="">Choisir niveau</option>
+          <option *ngFor="let items of niveau" >{{items.nom}}</option>
+        </select>
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <!-- la table -->
+  <mat-form-field class="" appearance="fill" id="matform">
+    <mat-label>Filtrer par numéro Etudiant</mat-label>
+    <input matInput (keyup)="applyFilter($event)" [(ngModel)]="filter" placeholder="Ex. 2021123AB">
+    <button *ngIf="showClose" mat-icon-button matSuffix (click)="reloadList()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <div class="mat-elevation-z8 mb-3" id="tables">
+    <h1 class="text-center text-danger">Les réservations de lits</h1>
+    <table mat-table [dataSource]="dataSource">
+
+      <!-- ID username -->
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> Numero Carte </th>
+        <td mat-cell *matCellDef="let row"> {{row.username}} </td>
+      </ng-container>
+
+      <!-- prenom Column -->
+      <ng-container matColumnDef="prenom">
+        <th mat-header-cell *matHeaderCellDef> Prénoms </th>
+        <td mat-cell *matCellDef="let row"> {{row.prenoms}}</td>
+      </ng-container>
+
+      <!-- Nom Column -->
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let row"> {{row.nom}} </td>
+      </ng-container>
+
+      <!-- moyenne Column -->
+      <ng-container matColumnDef="moyenne">
+        <th mat-header-cell *matHeaderCellDef> Moyenne </th>
+        <td mat-cell *matCellDef="let row" [style.color]="row.moyenne"> {{row.moyenne}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Aucun résultat trouvé.</td>
+      </tr>
+    </table>
+
+    <app-pagination
+      [length]="myPageLength"
+      [pageSize]="myPageSize"
+      [pageIndex]=""
+      (currentPage)="getServerData($event)">
+    </app-pagination>
+  </div>
+  <div class=" text-center">
+    <button (click)="exportAsXLSX()" class="btn btn-success mb-2">Exporter la liste</button>
+  </div>
+  <!-- <div class=" text-center">
+    <button (click)="sendCollection()" class="btn btn-success mb-2">Send collection</button>
+  </div> -->
+</div>
+
+<mat-spinner *ngIf="spinner" style="position:absolute;top: 50%; left:50%" color="accent"></mat-spinner>
+

@@ -1,0 +1,153 @@
+<div class="container mt-3">
+
+
+<!-- LISTE DES ETUDIANTS -->
+
+<div class="container">
+
+  <div class="mt-3" *ngIf="statut!='Non disponible' && !reserved">
+    <mat-card class="bg-success shadow-sm">
+      <h2 class="text-center"> Vous êtes {{statut}} à une codification.</h2>
+    </mat-card>
+  </div>
+
+  <div class=" mt-4 text-center" >
+    <div>
+      <div class="alert alert-success" role="alert" *ngIf="reserved">
+        Votre reservation de codification est en cour de traitement. <br>Merci de patienter.
+      </div>
+  </div>
+
+
+
+
+  <!-- Button trigger modal -->
+  <div class=" mt-4 text-center" >
+    <div>
+      <button *ngIf="!reserved && statut=='Eligible'" type="button" class="btn btn-primary"
+              data-toggle="modal" data-target="#exampleModalCenter">
+        Je réserve une codification
+      </button>
+  </div>
+
+  <div class=" mt-4 text-center info-quota" >
+    <div>
+      <span *ngIf="statut=='Non disponible'" class="btn btn-primary">
+        Vos quotas ne sont pas encore disponibles.
+      </span>
+  </div>
+  
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" >
+        <h5 class="modal-title" id="exampleModalCenterTitle" >Confirmation de la reservation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Veillez confirmer pour valider votre reservation.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuller</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="validerReserve()">Confirmer</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+    <!-- Column bouttton lit et la liste des lits -->
+  <div *ngIf="statut!='Non disponible' && quotaLit$ | async as nbLit" class="mt-3 shadow-sm ">
+    <mat-card>
+      <h2>Il y'a {{nbLit}} lits affecté(s) à votre niveau.</h2>
+    </mat-card>
+  </div>
+
+  <!-- la table -->
+  <div class=" tableusers float-left col-lg-8 col-sm-8 col-md-8 mt-5" >
+    <mat-form-field class="" appearance="fill" id="matform">
+      <mat-label>Filtrer par numéro Etudiant</mat-label>
+      <input matInput (keyup)="applyFilter($event)" [(ngModel)]="filter" placeholder="Ex. 2021123AB">
+      <button *ngIf="showClose" mat-icon-button matSuffix (click)="reloadList()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <h1 class="text-center text-danger">Les résultats de mon niveau</h1>
+    <table mat-table [dataSource]="dataSource">
+
+      <!-- ID username -->
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> Numero Carte </th>
+        <td mat-cell *matCellDef="let row"> {{row.numero}} </td>
+      </ng-container>
+
+      <!--  moyenne -->
+      <ng-container matColumnDef="moyenne">
+        <th mat-header-cell *matHeaderCellDef> Moyenne </th>
+        <td mat-cell *matCellDef="let row"> {{row.moyenne}}</td>
+      </ng-container>
+
+      <!-- ID Rang -->
+      <ng-container matColumnDef="rang">
+        <th mat-header-cell *matHeaderCellDef> Rang </th>
+        <td mat-cell *matCellDef="let row"> {{tabMoyennes.indexOf(+row.moyenne)+1}} </td>
+      </ng-container>
+
+      <!--  prenom -->
+      <ng-container matColumnDef="prenoms">
+        <th mat-header-cell *matHeaderCellDef> Prénoms </th>
+        <td mat-cell *matCellDef="let row"> {{row.prenoms}} </td>
+      </ng-container>
+
+      <!--  nom -->
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let row" [style.color]="row.nom"> {{row.nom}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Aucun résultat trouvé.</td>
+      </tr>
+    </table>
+    <app-pagination
+    [length]="myPageLength"
+    [pageSize]="myPageSize"
+    [pageIndex]=""
+    (currentPage)="getServerData($event)">
+    </app-pagination>
+  </div>
+</div>
+
+  <!-- Info personnal de l'étudiant. -->
+  <div class=" mesinfo float-right col-lg-4 col-sm-4 col-md-4 p-5 " >
+
+      <mat-card class="bg-success text-center h5">Mes infos</mat-card>
+
+      <mat-card class="text-left">
+        <p><strong>Nom</strong> &nbsp; {{userConnected.nom}}</p>
+        <p><strong>Prénom(s)</strong> &nbsp; {{userConnected.prenoms}}</p>
+        <p><strong>Faculté</strong> &nbsp; {{userConnected.niveau.departement.faculte.nom}}</p>
+        <p><strong>Département</strong> &nbsp; {{userConnected.niveau.departement.nom}}</p>
+        <p><strong>Niveau</strong> &nbsp; {{userConnected.niveau.nom}}</p>
+        <p><strong>Moyenne</strong> &nbsp; {{userConnected.moyenne}}</p>
+        <p *ngIf="statutEtudiant$ | async as statut"><strong>Nombre d'inscrits</strong> &nbsp; {{statut.nombreInscrits}}</p>
+        <p *ngIf="statutEtudiant$ | async as statut"><strong>Rang</strong> &nbsp; {{statut.rang}}</p>
+        <p><strong>Statut</strong> &nbsp; {{statut}}</p>
+      </mat-card>
+ </div>
+
+
+</div>
+</div>
+
+<mat-spinner *ngIf="spinner" style="position:absolute;top: 50%; left:50%" color="accent"></mat-spinner>
